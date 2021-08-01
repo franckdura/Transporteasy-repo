@@ -1,0 +1,19 @@
+FROM python:3.9
+
+RUN mkdir /home/dev/ && mkdir /home/dev/code
+
+WORKDIR /home/dev/code
+
+COPY  . /home/dev/code/
+
+
+WORKDIR /home/dev/code/
+
+
+RUN pip install --upgrade pip && pip install -r requirements.txt
+
+
+RUN echo $(ls -l .)
+
+
+CMD ["python3", "run.py"]

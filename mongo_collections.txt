@@ -1,0 +1,43 @@
+db.createCollection( "User", {
+   validator: { $jsonSchema: {
+      bsonType: "object",
+      required: [ "username","password" ],
+      properties: {
+         username: {
+            bsonType: "string",
+            description: "must be a string and is required"
+         },
+         password: {
+            bsonType : "string",
+                     },
+         karmapoints: {
+            bsonType : "int",
+         }
+      }
+   } }
+} )
+
+db.createCollection( "Line", {
+   validator: { $jsonSchema: {
+      bsonType: "object",
+      required: [ "line" ],
+      properties: {
+         line: {
+            bsonType: "string",
+            description: "must be a string and is required"
+         },
+         nbr_stations: {
+            bsonType : "int",
+                     },
+         avg_rate: {
+            bsonType : "double",
+         },
+         nbr_rates: {
+            bsonType : "int",
+                     },
+      }
+   } }
+} )
+
+
+db.createCollection("Report",{validator:{$jsonSchema:{bsonType: "object",required:["report","place_id ],properties:{report:{bsonType: "string",},place_id:{bsonType: "string",},time:{bsonType: "string",},}}}})

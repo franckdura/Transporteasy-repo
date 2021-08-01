@@ -1,0 +1,8 @@
+-i https://pypi.org/simple
+Flask
+Flask-Admin
+Flask-Bootstrap
+Flask-PyMongo
+Flask-WTF
+pymongo
+WTForms

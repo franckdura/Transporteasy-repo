@@ -1,0 +1,56 @@
+version: '3'
+
+
+services:
+
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile_flask
+    hostname: app
+    restart: unless-stopped
+
+    container_name: flaskapp
+    environment:
+      APP_ENV: "debug"
+      APP_DEBUG: "True"
+      APP_PORT: 5000
+      MONGODB_DATABASE: mongodb
+      MONGODB_HOSTNAME: mongodb
+      FLASK_ENV: development
+    ports:
+     - "5000:5000"
+    command: ["python3", "run.py"]
+    volumes:
+      - ./app:/home/dev/code/app*
+    links:
+      - mongodb
+
+
+
+
+  mongodb:
+    image: mongo:4.0.8
+    hostname: mongodb
+    container_name: mongodb
+    restart: unless-stopped
+    command: mongod
+    environment:
+      MONGO_INITDB_DATABASE: mongodb
+      MONGODB_DATA_DIR: /data/db
+      MONDODB_LOG_DIR: /dev/null
+    volumes:
+      - mongodbdata:/data/db
+    ports:
+        - "27017:27017"
+
+
+networks:
+  default:
+
+volumes:
+  mongodbdata:
+    driver: local
+  appdata:
+    driver: local
